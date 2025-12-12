@@ -21,7 +21,8 @@ func main() {
 	flag.Parse()
 
 	if flag.NArg() < 1 {
-		log.Fatalf("No directory provided.\nUsage: projdump <directory>")
+		flag.Usage()
+		os.Exit(1)
 	}
 
 	root := flag.Arg(0)
