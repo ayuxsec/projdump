@@ -34,7 +34,7 @@ Usage: ./projdump <directory> [flags]
 
 Flags:
   -config string
-        Path to config file (default "/home/ayux/.config/projdump/config.yaml")
+        Path to config file (default "$HOME/.config/projdump/config.yaml")
   -force-config
         Force-create config file with default values
   -no-warn
