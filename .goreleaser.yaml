@@ -1,0 +1,41 @@
+project_name: projdump
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: projdump
+    main: .
+    binary: projdump
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+      - freebsd
+    goarch:
+      - amd64
+      - arm64
+
+checksum:
+  name_template: '{{ .ProjectName }}_checksums.txt'
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+
+archives:
+  -
+    formats: [ binary ]
+    name_template: "{{ .Binary}}.{{ .Os }}.{{ .Arch }}"
+
+release:
+  github:
+    owner: ayuxsec
+    name: projdump
+    
