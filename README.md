@@ -47,8 +47,8 @@ Examples:
 
 ```console
 projdump .
-projdump -output allmychaos.txt
-projdump -force-config  # oops, reset everything
+projdump . -output allmychaos.txt
+projdump . -force-config  # oops, reset everything
 ```
 
 That’s it. It dumps your project.
