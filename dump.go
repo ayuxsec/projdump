@@ -12,6 +12,7 @@ func DumpFiles(files []string, outputPath string) error {
 		return err
 	}
 	defer out.Close()
+	fmt.Printf("[INF] Writting %d file(s) to %s\n", len(files), outputPath)
 
 	for _, f := range files {
 		fmt.Fprintf(out, "\n---\n %s \n---\n\n", f)
