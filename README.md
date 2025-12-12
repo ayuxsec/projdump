@@ -29,22 +29,24 @@ output_file: projdump.txt
 ## Usage
 
 ```console
-$ projdump -h
-Usage of projdump:
+$ ./projdump 
+Usage: ./projdump <directory> [flags]
+
+Flags:
   -config string
-        Path to config file (default "~/.config/projdump/config.yaml")
+        Path to config file (default "/home/ayux/.config/projdump/config.yaml")
   -force-config
-        Force-create config file with default values even if it exists
+        Force-create config file with default values
+  -no-warn
+        Skip warning for large dumps. Use with extreme caution!
   -output string
-        Output file path (overrides config)
-  -path string
-        Root directory to scan (default ".")
+        Output file (overrides config)
 ```
 
 Examples:
 
 ```console
-projdump                # btw don’t run this in your home directory unless you want a 3-hour dump
+projdump .
 projdump -output allmychaos.txt
 projdump -force-config  # oops, reset everything
 ```
