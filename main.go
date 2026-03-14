@@ -9,10 +9,13 @@ import (
 )
 
 func main() {
+	extFile := flag.String("ignore-file", "", "comma seperated list of file extension to ignore")
+	extFolder := flag.String("ignore-dir", "", "comma seperated list of directories names to ignore")
 	configPath := flag.String("config", DefaultCfgPath, "Path to config file")
 	forceCreateCfg := flag.Bool("force-config", false, "Force-create config file with default values")
 	outputFile := flag.String("output", "", "Output file (overrides config)")
 	skipWarn := flag.Bool("no-warn", false, "Skip warning for large dumps. Use with extreme caution!")
+	Version := flag.Bool("version", false, "print version and exit")
 
 	flag.Usage = func() {
 		fmt.Fprintf(flag.CommandLine.Output(), "Usage: %s <directory> [flags]\n\n", os.Args[0])
@@ -22,11 +25,15 @@ func main() {
 
 	flag.Parse()
 
+	if *Version {
+		fmt.Println(VersionString())
+		os.Exit(0)
+	}
+
 	if flag.NArg() < 1 {
 		flag.Usage()
 		os.Exit(1)
 	}
-
 	root := flag.Arg(0)
 
 	if err := LoadOrCreateConfig(*configPath, *forceCreateCfg); err != nil {
@@ -35,6 +42,16 @@ func main() {
 
 	if Cfg == nil {
 		log.Fatalf("Config is nil after loading")
+	}
+
+	if *extFile == "" {
+		extFileSlice := strings.Split(*extFile, ",")
+		Cfg.ExcludeFileExts = append(Cfg.ExcludeFileExts, extFileSlice...)
+	}
+
+	if *extFolder == "" {
+		extFolderSlice := strings.Split(*extFolder, ",")
+		Cfg.ExcludeDirs = append(Cfg.ExcludeDirs, extFolderSlice...)
 	}
 
 	files, err := CollectFiles(root, Cfg)

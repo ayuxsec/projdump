@@ -21,7 +21,7 @@ func DefaultConfig() Config {
 	return Config{
 		ExcludeDirs:      []string{"node_modules", "vendor", ".git"},
 		ExcludeFileNames: []string{"projdump.txt"},
-		ExcludeFileExts:  []string{".jpeg", ".jpg", ".png", ".gif", ".svg", ".pdf"},
+		ExcludeFileExts:  []string{".jpeg", ".jpg", ".png", ".gif", ".svg", ".pdf", ".env"},
 		OutputFile:       "projdump.txt",
 	}
 }
